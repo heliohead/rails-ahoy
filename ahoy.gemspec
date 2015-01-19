@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Ahoy::VERSION
   spec.authors       = ["Nathan Pearson"]
   spec.email         = ["npearson72@gmail.com"]
-  spec.summary       = "Coming soon..."
-  spec.description   = "Coming soon..."
+  spec.summary       = "Quick and painless Rails deployment"
+  spec.description   = "Generator for building ansible based provisioning scripts, and mina/puma deployment scripts"
   spec.homepage      = ""
   spec.license       = "MIT"
 
