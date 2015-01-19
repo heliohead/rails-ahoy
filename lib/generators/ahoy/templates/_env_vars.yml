@@ -1,0 +1,7 @@
+---
+application_name: <%= Rails.application.class.parent_name.underscore %>_production
+production:
+  db_name:
+  db_user:
+  db_password:
+  secret_key_base:

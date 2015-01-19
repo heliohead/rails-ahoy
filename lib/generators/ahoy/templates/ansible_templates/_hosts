@@ -1,0 +1,5 @@
+[production_root]
+production_root ansible_ssh_host=<%= @server_ip == '' ? '127.0.0.1' : @server_ip %>
+
+[production_deploy]
+production_deploy ansible_ssh_host=<%= @server_ip == '' ? '127.0.0.1' : @server_ip %> ansible_ssh_port=<%= @server_ssh_port == '' ? '22' : @server_ssh_port %>

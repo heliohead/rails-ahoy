@@ -1,0 +1,6 @@
+---
+- name: create deploy user
+  user: name={{ deploy_user }} shell=/bin/bash generate_ssh_key=yes ssh_key_bits=2048
+
+- name: allow deploy user sudo commands without password
+  action: lineinfile dest=/etc/sudoers regexp="^root" line="root ALL=(ALL:ALL) ALL\n{{ deploy_user }} ALL=(ALL) NOPASSWD:ALL" state=present

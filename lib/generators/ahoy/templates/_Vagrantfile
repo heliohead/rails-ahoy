@@ -9,7 +9,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 3000, host: 3000
 
   config.vm.provider 'virtualbox' do |v|
-    v.memory = <%= @memory * 1024 %>
-    v.cpus = <%= @cpus %>
+    v.memory = <%= @memory == 0 ? 2048 : (@memory * 1024) %>
+    v.cpus = <%= @cpus == 0 ? 1 : @cpus %>
+  end
+
+  config.vm.provision 'ansible' do |ansible|
+    ansible.playbook = 'config/ansible/playbooks/playbook.yml'
+    ansible.limit = 'default'
   end
 end

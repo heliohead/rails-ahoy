@@ -1,0 +1,35 @@
+---
+# Vagrant playbook
+#==========================================================
+- hosts: default
+  sudo: true
+  roles:
+    - role: user
+    - role: essentials
+    - role: nodejs
+    - role: postgresql
+    - role: ruby
+  tasks:
+    - include: tasks/vagrant_settings.yml
+
+# Web playbook
+#==========================================================
+- hosts: production_root
+  sudo: true
+  user: root
+  roles:
+    - role: user
+    - role: security
+
+- hosts: production_deploy
+  sudo: true
+  user: deploy
+  vars_files:
+    - ../../env_vars.yml
+  roles:
+    - role: essentials
+    - role: nodejs
+    - role: nginx
+    - role: postgresql
+    - role: ruby
+    - role: deploy_env

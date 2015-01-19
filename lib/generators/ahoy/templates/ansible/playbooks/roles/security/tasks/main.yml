@@ -1,0 +1,9 @@
+---
+- name: install fail2ban
+  apt: name=fail2ban state=present update_cache=true
+  when: inventory_hostname == 'web_root'
+
+- include: firewall.yml
+  when: inventory_hostname == 'web_root'
+
+- include: ssh_settings.yml
