@@ -3,17 +3,17 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
 
-set :repository, 'git@github.com:npearson72/swift_platform.git'
+set :repository, "<%= @github_repo %>"
 set :branch, 'master'
-set :deploy_to, '/var/www/platform'
-set :app_path, '/var/www/platform/current'
+set :deploy_to, "/var/www/<%= Rails.application.class.parent_name.underscore %>"
+set :app_path, "/var/www/<%= Rails.application.class.parent_name.underscore %>/current"
 set :forward_agent, true
 set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'tmp']
 
 task :production do
   set :user, 'deploy'
-  set :domain, '104.236.149.103'
-  set :port, 1224
+  set :domain, "<%= @server_ip == '' ? '127.0.0.1' : @server_ip %>"
+  set :port, <%= @server_ssh_port == '' ? '22' : @server_ssh_port %>
   set :stage, 'production'
 end
 

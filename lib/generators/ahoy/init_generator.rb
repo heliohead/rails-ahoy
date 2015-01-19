@@ -11,10 +11,8 @@ module Ahoy
       generate 'ahoy:ansible'
       divider
       generate 'ahoy:vagrant'
-      #  divider
-      # generate 'ahoy:puma'
-      #  divider
-      # generate 'ahoy:mina'
+       divider
+      generate 'ahoy:deploy'
       divider
       puts 'Finalizing...'
       copy_env_vars_file
@@ -26,6 +24,7 @@ module Ahoy
 
     def copy_env_vars_file
       template '_env_vars.yml', 'config/env_vars.yml'
+      append_file '.gitignore', 'config/env_vars.yml'
     end
 
     def divider

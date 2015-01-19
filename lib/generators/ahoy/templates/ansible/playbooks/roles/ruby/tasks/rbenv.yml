@@ -4,6 +4,7 @@
   with_items:
     - libqt4-dev
     - libssl-dev
+    - libreadline-dev
 
 - name: install rbenv
   sudo: true

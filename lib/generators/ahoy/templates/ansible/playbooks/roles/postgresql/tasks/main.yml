@@ -33,7 +33,7 @@
 - name: create database
   postgresql_db: name={{ database.name }} owner={{ database.user }} encoding=unicode lc_collate=en_US.utf8 lc_ctype=en_US.utf8 template=template0
   sudo_user: postgres
-  when: inventory_hostname == 'web_deploy'
+  when: inventory_hostname == 'production_deploy'
 
 - name: ensure postgres starts on a fresh reboot
   service: name=postgresql state=started enabled=yes

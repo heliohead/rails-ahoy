@@ -1,7 +1,7 @@
 ---
-application_name: <%= Rails.application.class.parent_name.underscore %>_production
+application_name: <%= Rails.application.class.parent_name.underscore %>
 production:
-  db_name:
-  db_user:
-  db_password:
-  secret_key_base:
+  db_name: <%= Rails.application.class.parent_name.underscore %>_production
+  db_user: deploy
+  db_password: # Remember to add your own!!
+  secret_key_base: # Remember to add your own!!

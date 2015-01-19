@@ -9,10 +9,10 @@ environment ENV['RACK_ENV'] || 'production'
 
 daemonize true
 
-pidfile "/var/www/platform/shared/tmp/pids/puma.pid"
-stdout_redirect "/var/www/platform/shared/tmp/log/stdout", "/var/www/platform/shared/tmp/log/stderr"
+pidfile "/var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/pids/puma.pid"
+stdout_redirect "/var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/log/stdout", "/var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/log/stderr"
 
-bind "unix:///var/www/platform/shared/tmp/sockets/puma.sock"
+bind "unix:///var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/sockets/puma.sock"
 
 on_worker_boot do
   # worker specific setup

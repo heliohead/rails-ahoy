@@ -1,18 +1,5 @@
 ---
-# Vagrant playbook
-#==========================================================
-- hosts: default
-  sudo: true
-  roles:
-    - role: user
-    - role: essentials
-    - role: nodejs
-    - role: postgresql
-    - role: ruby
-  tasks:
-    - include: tasks/vagrant_settings.yml
-
-# Web playbook
+# Production playbook
 #==========================================================
 - hosts: production_root
   sudo: true

@@ -1,5 +1,5 @@
 ---
-app_name: <%= Rails.application.class.parent_name.underscore %>_production
+app_name: <%= Rails.application.class.parent_name.underscore %>
 postgresql:
   version: <%= @postgresql_version == '' ? '9.3' : @postgresql_version %>
 ruby_version: <%= @ruby_version == '' ? '2.1.5' : @ruby_version %>

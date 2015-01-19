@@ -7,7 +7,7 @@
 
 - name: change ssh port
   sudo: true
-  action: lineinfile dest=/etc/ssh/sshd_config regexp="^#?Port" line="Port 1224"
+  action: lineinfile dest=/etc/ssh/sshd_config regexp="^#?Port" line="Port <%= @server_ssh_port == '' ? '22' : @server_ssh_port %>"
 
 - name: disable root user login via ssh
   sudo: true

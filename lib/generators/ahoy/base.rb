@@ -3,10 +3,6 @@ module Ahoy
     def root
       File.dirname(__FILE__)
     end
-
-#     def templates_path
-#       root + '/templates/'
-#     end
   end
 
   module Generator
