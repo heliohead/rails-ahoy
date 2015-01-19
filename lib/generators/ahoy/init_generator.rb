@@ -1,3 +1,4 @@
+require 'ahoy/version'
 require 'rails/generators'
 require 'generators/ahoy/base'
 
