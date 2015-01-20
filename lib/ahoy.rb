@@ -1,4 +1,5 @@
-require "ahoy/version"
+require 'ahoy/version'
+require 'ahoy'
 
 module Ahoy
   def self.env
