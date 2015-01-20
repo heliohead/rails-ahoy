@@ -7,6 +7,7 @@ module Ahoy
   class InitGenerator < Ahoy::Generator::Base
 
     def init
+      Ahoy::VariableStore.mkdir_tmp
       section_divider
       masthead
       section_divider
@@ -17,7 +18,7 @@ module Ahoy
       puts 'Finalizing...'
       section_divider
       puts 'Finished!'
-      Ahoy::VariableStore.clear!
+      Ahoy::VariableStore.rm_tmp
     end
 
 

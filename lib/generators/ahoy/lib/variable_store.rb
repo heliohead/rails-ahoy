@@ -12,8 +12,12 @@ module Ahoy
       YAML.load(File.open(Ahoy::Generator.temp_dir + "variables.yml", 'r'))
     end
 
-    def self.clear!
-      FileUtils.rm(Ahoy::Generator.temp_dir + "variables.yml")
+    def self.mkdir_tmp
+      FileUtils.mkdir(Ahoy::Generator.root + '/tmp')
+    end
+
+    def self.rm_tmp
+      FileUtils.remove_dir(Ahoy::Generator.root + '/tmp')
     end
   end
 end
