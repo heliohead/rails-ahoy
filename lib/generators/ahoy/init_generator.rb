@@ -12,8 +12,8 @@ module Ahoy
       section_divider
       generate 'ahoy:deployment'
       section_divider
-      # generate 'ahoy:vagrant'
-      # section_divider
+      generate 'ahoy:vagrant'
+      section_divider
       puts 'Finalizing...'
       section_divider
       puts 'Finished!'

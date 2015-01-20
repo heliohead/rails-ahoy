@@ -104,10 +104,8 @@ module Ahoy
 
     def modify_files
       append_file '.gitignore', '.env/'
-      inject_into_file 'config/environment.rb', after: "require File.expand_path('../application', __FILE__)\n" do <<-'RUBY'
-
-env_file = YAML.load(File.open(Rails.root + ".env/#{Rails.env}_env.yml", 'r'))
-env_file.each { |k,v| ENV[k.to_s.upcase] = v.to_s } if env_file.present?
+      inject_into_file 'config/environment.rb', after: "require File.expand_path('../application', __FILE__)\n\n" do <<-'RUBY'
+Ahoy.env
       RUBY
       end
     end

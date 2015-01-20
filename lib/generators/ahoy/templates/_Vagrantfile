@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision 'ansible' do |ansible|
-    ansible.playbook = 'config/ansible/playbooks/playbook.yml'
+    ansible.playbook = 'config/ansible/playbooks/vagrant.yml'
     ansible.limit = 'default'
   end
 end

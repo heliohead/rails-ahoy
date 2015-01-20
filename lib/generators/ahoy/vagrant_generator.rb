@@ -37,31 +37,16 @@ module Ahoy
     end
 
     def copy_files
-      copy_file '_database.yml', 'config/database.yml'
+      copy_file 'ansible_templates/playbooks/_vagrant.yml', 'config/ansible/playbooks/vagrant.yml'
+    end
+
+    def backup_files
+      FileUtils.mv 'config/database.yml', 'config/database.yml.bak'
     end
 
     def copy_templates
+      template '_database.yml', 'config/database.yml'
       template '_Vagrantfile', 'Vagrantfile'
-      template 'ansible_templates/playbooks/host_vars/_default.yml', 'config/ansible/playbooks/host_vars/default.yml'
-    end
-
-    def append_files
-      append_file 'config/ansible/playbooks/playbook.yml', VAGRANT_PLAYBOOK
     end
   end
 end
-
-VAGRANT_PLAYBOOK = "
-# Vagrant playbook
-#==========================================================
-- hosts: default
-  sudo: true
-  roles:
-    - role: user
-    - role: essentials
-    - role: nodejs
-    - role: postgresql
-    - role: ruby
-  tasks:
-    - include: tasks/vagrant_settings.yml
-"
