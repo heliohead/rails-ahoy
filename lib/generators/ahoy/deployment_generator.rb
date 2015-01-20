@@ -81,7 +81,6 @@ module Ahoy
     end
 
     def copy_files
-      copy_file '_puma.sh', 'bin/puma.sh'
       copy_file 'env_templates/_development_env.yml', '.env/development_env.yml'
       copy_file 'env_templates/_test_env.yml', '.env/test_env.yml'
     end
@@ -90,6 +89,7 @@ module Ahoy
       template 'ansible_templates/_production', 'config/ansible/production'
       template 'ansible_templates/playbooks/_production.yml', 'config/ansible/playbooks/production.yml'
       template 'ansible_templates/playbooks/group_vars/_all.yml', 'config/ansible/playbooks/group_vars/all.yml'
+      template '_puma.sh', 'bin/puma.sh'
       template '_puma.rb', 'config/puma.rb'
       template '_deploy.rb', 'config/deploy.rb'
       template 'env_templates/_production_env.yml', '.env/production_env.yml'
