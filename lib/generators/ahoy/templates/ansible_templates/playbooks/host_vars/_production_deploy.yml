@@ -1,7 +1,0 @@
----
-domain: <%= @server_ip == '' ? '127.0.0.1' : @server_ip %>
-deploy_user: deploy
-database:
-  name: "{{ production.db_name }}"
-  user: "{{ production.db_user }}"
-  password: "{{ production.db_password }}"

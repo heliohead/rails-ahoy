@@ -1,6 +1,4 @@
 ---
-app_name: <%= Rails.application.class.parent_name.underscore %>
-postgresql:
-  version: <%= @postgresql_version == '' ? '9.3' : @postgresql_version %>
-ruby_version: <%= @ruby_version == '' ? '2.1.5' : @ruby_version %>
+postgresql_version: <%= Ahoy::VariableStore.variables['postgresql_version'] %>
+ruby_version: <%= Ahoy::VariableStore.variables['ruby_version'] %>
 rbenv_root: /usr/local/rbenv

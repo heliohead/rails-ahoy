@@ -1,34 +1,29 @@
 require 'ahoy/version'
 require 'rails/generators'
 require 'generators/ahoy/base'
+require 'generators/ahoy/lib/variable_store'
 
 module Ahoy
   class InitGenerator < Ahoy::Generator::Base
 
     def init
-      divider
+      section_divider
       masthead
-      divider
-      generate 'ahoy:ansible'
-      divider
-      generate 'ahoy:vagrant'
-       divider
-      generate 'ahoy:deploy'
-      divider
+      section_divider
+      generate 'ahoy:deployment'
+      section_divider
+      # generate 'ahoy:vagrant'
+      # section_divider
       puts 'Finalizing...'
-      copy_env_vars_file
-      divider
+      section_divider
       puts 'Finished!'
+      Ahoy::VariableStore.clear!
     end
+
 
     private
 
-    def copy_env_vars_file
-      template '_env_vars.yml', 'config/env_vars.yml'
-      append_file '.gitignore', 'config/env_vars.yml'
-    end
-
-    def divider
+    def section_divider
       puts '=' * 100
     end
 

@@ -1,22 +1,21 @@
 ---
-# Production playbook
+# production playbook
 #==========================================================
-- hosts: production_root
+- hosts: root
   sudo: true
   user: root
   roles:
     - role: user
     - role: security
 
-- hosts: production_deploy
+- hosts: deploy
   sudo: true
-  user: deploy
-  vars_files:
-    - ../../env_vars.yml
+  user: <%= Ahoy::VariableStore.variables['server_user'] %>
   roles:
     - role: essentials
     - role: nodejs
     - role: nginx
     - role: postgresql
     - role: ruby
-    - role: deploy_env
+    - role: variables
+    - role: complete

@@ -8,11 +8,10 @@ port        ENV['PORT']     || 3000
 environment ENV['RACK_ENV'] || 'production'
 
 daemonize true
+pidfile "/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/shared/tmp/pids/puma.pid"
+stdout_redirect "/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/shared/tmp/log/stdout", "/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/shared/tmp/log/stderr"
 
-pidfile "/var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/pids/puma.pid"
-stdout_redirect "/var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/log/stdout", "/var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/log/stderr"
-
-bind "unix:///var/www/<%= Rails.application.class.parent_name.underscore %>/shared/tmp/sockets/puma.sock"
+bind "unix:///var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/shared/tmp/sockets/puma.sock"
 
 on_worker_boot do
   # worker specific setup

@@ -25,12 +25,10 @@ NeoBundle 'reedes/vim-colors-pencil'
 NeoBundle 'gcmt/taboo.vim'
 
 " Syntax highlighting
-" NeoBundle 'scrooloose/syntastic'
 NeoBundle 'jtratner/vim-flavored-markdown.git'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'pangloss/vim-javascript'
-" NeoBundle 'chase/vim-ansible-yaml'
 
 " Snippets & autocomplete
 NeoBundle 'sirver/ultisnips'

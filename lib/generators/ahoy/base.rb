@@ -1,7 +1,13 @@
+require 'generators/ahoy/base'
+
 module Ahoy
   module Initialize
     def root
       File.dirname(__FILE__)
+    end
+
+    def temp_dir
+      File.join(File.dirname(__FILE__), 'tmp/')
     end
   end
 
@@ -15,9 +21,8 @@ module Ahoy
 
       private
 
-      def defaults(value)
-        puts '-' * 100
-        puts "Default: #{value}"
+      def question(type, &block)
+        Ahoy::QuestionHelper.question(type, &block)
       end
     end
   end

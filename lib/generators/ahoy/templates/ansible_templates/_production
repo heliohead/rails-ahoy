@@ -1,0 +1,5 @@
+[production]
+root ansible_ssh_host=<%= Ahoy::VariableStore.variables['server_domain'] == '' ? '127.0.0.1' : Ahoy::VariableStore.variables['server_domain'] %>
+
+[production]
+deploy ansible_ssh_host=<%= Ahoy::VariableStore.variables['server_domain'] == '' ? '127.0.0.1' : Ahoy::VariableStore.variables['server_domain'] %> ansible_ssh_port=<%= Ahoy::VariableStore.variables['server_ssh_port'] == '' ? '22' : Ahoy::VariableStore.variables['server_ssh_port'] %>

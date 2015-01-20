@@ -1,0 +1,12 @@
+---
+server_user: <%= Ahoy::VariableStore.variables['server_user'] %>
+server_domain: <%= Ahoy::VariableStore.variables['server_domain'] %>
+server_ssh_port: <%= Ahoy::VariableStore.variables['server_ssh_port'] %>
+app_name: <%= Ahoy::VariableStore.variables['app_name'] %>
+app_root: <%= Ahoy::VariableStore.variables['app_name'] %>
+database_name: <%= Ahoy::VariableStore.variables['database_name'] %>
+database_user: <%= Ahoy::VariableStore.variables['database_user'] %>
+database_password: <%= Ahoy::VariableStore.variables['database_password'] %>
+app_repo: <%= Ahoy::VariableStore.variables['app_repo'] %>
+app_repo_branch: <%= Ahoy::VariableStore.variables['app_repo_branch'] %>
+secret_key_base:

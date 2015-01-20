@@ -1,7 +1,7 @@
 #! /bin/sh
 
 BUNDLE_BIN=/usr/local/rbenv/shims/bundle
-APP_PATH=/var/www/<%= Rails.application.class.parent_name.underscore %>
+APP_PATH=/var/www/$APP_ROOT
 PUMA_CONFIG_FILE=$APP_PATH/current/config/puma.rb
 PUMA_PID_FILE=$APP_PATH/shared/tmp/pids/puma.pid
 PUMA_SOCKET=$APP_PATH/shared/tmp/sockets/puma.sock

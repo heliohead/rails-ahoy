@@ -1,8 +1,0 @@
----
-domain: 127.0.0.1
-deploy_user: vagrant
-database:
-  name: <%= Rails.application.class.parent_name.underscore %>_production
-  user: vagrant
-  password: vagrant
-secret_key_base: <%= Rails.application.secrets.secret_key_base %>

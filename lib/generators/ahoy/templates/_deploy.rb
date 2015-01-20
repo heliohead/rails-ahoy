@@ -3,18 +3,20 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
 
-set :repository, "<%= @github_repo %>"
-set :branch, 'master'
-set :deploy_to, "/var/www/<%= Rails.application.class.parent_name.underscore %>"
-set :app_path, "/var/www/<%= Rails.application.class.parent_name.underscore %>/current"
-set :forward_agent, true
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'tmp']
+task :setup_variables => :environment do
+  set :user,          '<%= Ahoy::VariableStore.variables['server_user'] %>'
+  set :domain,        '<%= Ahoy::VariableStore.variables['server_domain'] %>'
+  set :port,          '<%= Ahoy::VariableStore.variables['server_ssh_port'] %>'
+  set :repository,    '<%= Ahoy::VariableStore.variables['app_repo'] %>'
+  set :branch,        '<%= Ahoy::VariableStore.variables['app_repo_branch'] %>'
+  set :forward_agent, true
+  set :deploy_to,     '/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>'
+  set :app_path,      '/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/current'
+  set :shared_paths,  ['config/database.yml', 'config/secrets.yml', 'log', 'tmp', '.env/production_env.yml']
+end
 
 task :production do
-  set :user, 'deploy'
-  set :domain, "<%= @server_ip == '' ? '127.0.0.1' : @server_ip %>"
-  set :port, <%= @server_ssh_port == '' ? '22' : @server_ssh_port %>
-  set :stage, 'production'
+  invoke :setup_variables
 end
 
 task :environment do
@@ -35,7 +37,6 @@ task :deploy => :environment do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-
     to :launch do
       invoke :'server:restart'
     end
@@ -44,8 +45,8 @@ end
 
 namespace :server do
   [:start, :stop, :restart].each do |action|
-    task action do
-      queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh #{action}"
+    task action => :environment do
+      queue "cd #{app_path} && RAILS_ENV=#{settings[:rails_env]} && bin/puma.sh #{action}"
     end
   end
 end
