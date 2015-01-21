@@ -42,15 +42,13 @@ gem 'rails-ahoy'
 
     $ bundle install
 
-### Step 2
-
 Execute the following terminal command to launch Ahoy's interactive guide
 
     $ rails generate ahoy:init
 
 Continue to next step AFTER you complete the interactive guide
 
-### Step 3
+### Step 2
 
 If you don't have a production *secret_key_base*, generate one using:
 
@@ -66,20 +64,19 @@ Now just copy and paste it into the following file:
 
 **IMPORTANT:** At this point make sure to commit your changes and push them up to your repo!
 
-### Step 4
+### Step 3
 
 **IMPORTANT:** For this step, you will need a freshly installed Ubuntu box with root ssh privileges. If you're not sure how to do this, contact your web hosting administrator.
 
-From within your Rails app...
+From the root of your Rails application...
 
-    $ cd config/ansible
-    $ ./production.sh
+    $ cd config/ansible && ./production.sh
 
 Executing `production.sh` will launch the provisioning process and setup your box so it can run Rails using Nginx as the web server, Puma as your application server, and PostgreSQL as your database.
 
 **NOTE:** This process may take a while (15 mins or so), so sit back and relax.
 
-### Step 5
+### Step 4
 
 **ASSUMPTION:** This step assumes that your code is hosted in a Github repo.
 
@@ -97,7 +94,7 @@ This will print out something like this:
 
 Copy the public key and paste it into your Rails application Github repo settings to allow SSH access.
 
-### Step 6
+### Step 5
 
 Go back to the root of your Rails application and execute the following command:
 
