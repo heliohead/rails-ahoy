@@ -5,6 +5,7 @@
     - libqt4-dev
     - libssl-dev
     - libreadline-dev
+    - libffi-dev
 
 - name: install rbenv
   sudo: true
