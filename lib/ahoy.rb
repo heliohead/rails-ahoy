@@ -3,7 +3,13 @@ require 'ahoy'
 
 module Ahoy
   def self.env
-    env_file = YAML.load(File.open(Rails.root + ".env/#{Rails.env}_env.yml", 'r'))
-    env_file.each { |k,v| ENV[k.to_s.upcase] = v.to_s } if env_file.present?
+    begin
+      env_file = File.open(Rails.root + ".env/#{Rails.env}_env.yml", 'r')
+    rescue
+      if env_file
+        env_yaml = YAML.load(env_file)
+        env_yaml.each { |k,v| ENV[k.to_s.upcase] = v.to_s } if env_yaml.present?
+      end
+    end
   end
 end
