@@ -103,7 +103,7 @@ module Ahoy
     def modify_files
       append_file '.gitignore', '.env/'
       inject_into_file 'config/environment.rb', after: "require File.expand_path('../application', __FILE__)\n\n" do <<-'RUBY'
-Ahoy.env
+Ahoy.load_variables
 
       RUBY
       end
