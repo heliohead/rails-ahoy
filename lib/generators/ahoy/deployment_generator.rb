@@ -86,7 +86,7 @@ module Ahoy
     end
 
     def copy_templates
-      template 'ansible_templates/_production', 'config/ansible/production'
+      template 'ansible_templates/_hosts', 'config/ansible/hosts'
       template 'ansible_templates/playbooks/_production.yml', 'config/ansible/playbooks/production.yml'
       template 'ansible_templates/playbooks/group_vars/_all.yml', 'config/ansible/playbooks/group_vars/all.yml'
       template '_puma.sh', 'bin/puma.sh'
@@ -96,15 +96,12 @@ module Ahoy
     end
 
     def add_gems
-      gem_group :production do
-        gem 'puma'
-        gem 'rb-readline'
-      end
+      gem 'puma'
+      gem 'rb-readline'
     end
 
     def modify_files
       append_file '.gitignore', '.env/'
-      prepend_file 'config/environment.rb', "require 'ahoy'\n"
       inject_into_file 'config/environment.rb', after: "require File.expand_path('../application', __FILE__)\n\n" do <<-'RUBY'
 Ahoy.env
 
@@ -113,7 +110,7 @@ Ahoy.env
     end
 
     def change_permissions
-      FileUtils.chmod 0751, 'config/ansible/production.sh'
+      FileUtils.chmod 0751, 'config/ansible/provision.sh'
       FileUtils.chmod 0751, 'bin/puma.sh'
     end
 

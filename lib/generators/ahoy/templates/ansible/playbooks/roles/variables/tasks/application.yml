@@ -1,15 +1,15 @@
 ---
 - name: check if .env exists
-  stat: path=/var/www/{{app_root}}/shared/.env/production_env.yml
+  stat: path={{app_root}}/shared/.env/{{rails_env}}_env.yml
   register: env_file
 
 - name: delete .env if exists
-  shell: rm /var/www/{{app_root}}/shared/.env/production_env.yml
+  shell: rm {{app_root}}/shared/.env/{{rails_env}}_env.yml
   when: env_file.stat.exists == true
 
 - name: add environment variables to .env
   lineinfile:
-    dest=/var/www/{{app_root}}/shared/.env/production_env.yml
+    dest={{app_root}}/shared/.env/{{rails_env}}_env.yml
     line='{{item}}'
     owner={{server_user}}
     insertafter=EOF

@@ -3,33 +3,34 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
 
-task :setup_variables => :environment do
-  set :user,          '<%= Ahoy::VariableStore.variables['server_user'] %>'
+set :deploy_to,     '/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>'
+set :app_path,      '/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/current'
+set :user,          '<%= Ahoy::VariableStore.variables['server_user'] %>'
+set :port,          '<%= Ahoy::VariableStore.variables['server_ssh_port'] %>'
+set :repository,    '<%= Ahoy::VariableStore.variables['app_repo'] %>'
+set :forward_agent, true
+
+task :production do
   set :domain,        '<%= Ahoy::VariableStore.variables['server_domain'] %>'
-  set :port,          '<%= Ahoy::VariableStore.variables['server_ssh_port'] %>'
-  set :repository,    '<%= Ahoy::VariableStore.variables['app_repo'] %>'
   set :branch,        '<%= Ahoy::VariableStore.variables['app_repo_branch'] %>'
-  set :forward_agent, true
-  set :deploy_to,     '/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>'
-  set :app_path,      '/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>/current'
+  set :rails_env,     'production'
   set :shared_paths,  ['config/database.yml', 'config/secrets.yml', 'log', 'tmp', '.env/production_env.yml']
 end
 
-task :production do
-  invoke :setup_variables
-end
-
 task :environment do
-  queue! %[export PATH="/usr/local/rbenv/bin:/usr/local/rbenv/shims:$PATH"]
+  queue 'export PATH=/usr/local/rbenv/bin:/usr/local/rbenv/shims:$PATH'
+  queue 'source ~/.session_vars'
 end
 
-task :setup => :environment do
-  ['log', 'config', 'tmp/log', 'tmp/pids', 'tmp/sockets'].each do |dir|
-    queue! %[mkdir -m 750 -p "#{deploy_to}/#{shared_path}/#{dir}"]
-  end
+task setup: :environment do
+  queue "mkdir -m 750 -p #{deploy_to}/#{shared_path}/log"
+  queue "mkdir -m 750 -p #{deploy_to}/#{shared_path}/config"
+  queue "mkdir -m 750 -p #{deploy_to}/#{shared_path}/tmp/log"
+  queue "mkdir -m 750 -p #{deploy_to}/#{shared_path}/tmp/pids"
+  queue "mkdir -m 750 -p #{deploy_to}/#{shared_path}/tmp/sockets"
 end
 
-task :deploy => :environment do
+task deploy: :environment do
   deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
@@ -44,9 +45,15 @@ task :deploy => :environment do
 end
 
 namespace :server do
-  [:start, :stop, :restart].each do |action|
-    task action => :environment do
-      queue "cd #{app_path} && RAILS_ENV=#{settings[:rails_env]} && bin/puma.sh #{action}"
-    end
+  task start: :environment do
+    queue "cd #{app_path} && rails_env=#{rails_env} && bin/puma.sh start"
+  end
+
+  task stop: :environment do
+    queue "cd #{app_path} && rails_env=#{rails_env} && bin/puma.sh stop"
+  end
+
+  task restart: :environment do
+    queue "cd #{app_path} && rails_env=#{rails_env} && bin/puma.sh restart"
   end
 end

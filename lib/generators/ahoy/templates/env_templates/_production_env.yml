@@ -2,8 +2,9 @@
 server_user: <%= Ahoy::VariableStore.variables['server_user'] %>
 server_domain: <%= Ahoy::VariableStore.variables['server_domain'] %>
 server_ssh_port: <%= Ahoy::VariableStore.variables['server_ssh_port'] %>
+rails_env: production
 app_name: <%= Ahoy::VariableStore.variables['app_name'] %>
-app_root: <%= Ahoy::VariableStore.variables['app_name'] %>
+app_root: /var/www/<%= Ahoy::VariableStore.variables['app_name'] %>
 database_name: <%= Ahoy::VariableStore.variables['database_name'] %>
 database_user: <%= Ahoy::VariableStore.variables['database_user'] %>
 database_password: <%= Ahoy::VariableStore.variables['database_password'] %>

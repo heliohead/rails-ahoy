@@ -70,9 +70,9 @@ Now just copy and paste it into the following file:
 
 From the root of your Rails application...
 
-    $ cd config/ansible && ./production.sh
+    $ cd config/ansible && ./provision.sh production
 
-Executing `production.sh` will launch the provisioning process and setup your box so it can run Rails using Nginx as the web server, Puma as your application server, and PostgreSQL as your database.
+Executing `provision.sh <RAILS ENVIRONMENT FOR DEPLOYED APP>` will launch the provisioning process and setup your box so it can run Rails using Nginx as the web server, Puma as your application server, and PostgreSQL as your database.
 
 **NOTE:** This process may take a while (15 mins or so), so sit back and relax.
 

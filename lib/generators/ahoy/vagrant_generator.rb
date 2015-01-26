@@ -40,6 +40,10 @@ module Ahoy
       copy_file 'ansible_templates/playbooks/_vagrant.yml', 'config/ansible/playbooks/vagrant.yml'
     end
 
+    def modify_files
+      append_file '.gitignore', "\n.vagrant/"
+    end
+
     def backup_files
       FileUtils.mv 'config/database.yml', 'config/database.yml.bak'
     end

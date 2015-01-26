@@ -1,14 +1,17 @@
 ---
 - name: create config directory
   sudo: true
-  file: path=/var/www/{{app_root}}/shared/config owner={{server_user}} group={{server_user}} recurse=yes state=directory
+  file: path={{app_root}}/shared/config owner={{server_user}} group={{server_user}} recurse=yes state=directory
 
 - name: copy database.yml
-  template: src=database.yml dest=/var/www/{{app_name}}/shared/config/database.yml owner={{server_user}} group={{server_user}}
+  template: src=database.yml dest={{app_root}}/shared/config/database.yml owner={{server_user}} group={{server_user}}
 
 - name: copy secrets.yml
-  template: src=secrets.yml dest=/var/www/{{app_name}}/shared/config/secrets.yml owner={{server_user}} group={{server_user}}
+  template: src=secrets.yml dest={{app_root}}/shared/config/secrets.yml owner={{server_user}} group={{server_user}}
 
-- name: update www directory permissions
+- name: update app root directory permissions
   sudo: true
-  file: path=/var/www owner={{server_user}} group={{server_user}} recurse=yes state=directory
+  file: path={{app_root}} owner={{server_user}} group={{server_user}} recurse=yes state=directory
+
+- name: add symlink to app root
+  file: src={{app_root}} dest=/home/{{server_user}}/app owner={{server_user}} group={{server_user}} state=link

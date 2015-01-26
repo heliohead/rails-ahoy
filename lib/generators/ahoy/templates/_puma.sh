@@ -1,10 +1,9 @@
 #! /bin/sh
 
 BUNDLE_BIN=/usr/local/rbenv/shims/bundle
-APP_PATH=/var/www/<%= Ahoy::VariableStore.variables['app_name'] %>
-PUMA_CONFIG_FILE=$APP_PATH/current/config/puma.rb
-PUMA_PID_FILE=$APP_PATH/shared/tmp/pids/puma.pid
-PUMA_SOCKET=$APP_PATH/shared/tmp/sockets/puma.sock
+PUMA_CONFIG_FILE=$APP_ROOT/current/config/puma.rb
+PUMA_PID_FILE=$APP_ROOT/shared/tmp/pids/puma.pid
+PUMA_SOCKET=$APP_ROOT/shared/tmp/sockets/puma.sock
 
 # check if puma process is running
 puma_is_running() {
