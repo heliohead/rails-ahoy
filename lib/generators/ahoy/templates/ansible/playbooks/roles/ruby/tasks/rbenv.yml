@@ -9,7 +9,7 @@
 
 - name: install rbenv
   sudo: true
-  git: repo=git://github.com/sstephenson/rbenv.git dest={{rbenv_root}}
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{rbenv_root}}
 
 - name: install ruby-build as rbenv plugin
   sudo: true
